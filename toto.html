@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini To-Do List</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    input[type="text"] {
+      width: 70%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-left: 0.5rem;
+      background-color: #007aff;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+    ul {
+      margin-top: 1rem;
+      padding-left: 1rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 400px) {
+      input[type="text"] {
+        width: 60%;
+        font-size: 0.9rem;
+      }
+      button {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Ma To-Do List</h1>
+  <div>
+    <input type="text" id="todo-input" placeholder="Ajouter une tâche..." />
+    <button onclick="addTodo()">Ajouter</button>
+  </div>
+  <ul id="todo-list"></ul>
+
+  <script>
+    const input = document.getElementById('todo-input');
+    const list = document.getElementById('todo-list');
+
+    function addTodo() {
+      const text = input.value.trim();
+      if (text === '') return;
+      const li = document.createElement('li');
+      li.textContent = text;
+      li.onclick = () => li.style.textDecoration = li.style.textDecoration === 'line-through' ? 'none' : 'line-through';
+      list.appendChild(li);
+      input.value = '';
+      input.focus();
+    }
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') addTodo();
+    });
+  </script>
+</body>
+</html>
